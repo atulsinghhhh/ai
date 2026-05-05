@@ -1,20 +1,15 @@
 import { createClient } from "@supabase/supabase-js";
 
-const getEnv = (key: string) => {
-  if (typeof import.meta !== "undefined" && (import.meta as any).env?.[key]) {
-    return (import.meta as any).env[key];
-  }
-  if (typeof process !== "undefined" && process.env?.[key]) {
-    return process.env[key];
-  }
-  return undefined;
-};
+// @ts-ignore
+const supabaseUrl = import.meta.env?.BUN_PUBLIC_SUPABASE_URL || process.env.BUN_PUBLIC_SUPABASE_URL;
+// @ts-ignore
+const supabasePublishableKey = import.meta.env?.BUN_PUBLIC_SUPABASE_PUBLISHABLE_KEY || process.env.BUN_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
-const supabaseUrl = getEnv("BUN_PUBLIC_SUPABASE_URL");
-const supabaseAnonKey = getEnv("BUN_PUBLIC_SUPABASE_PUBLISHABLE_KEY");
+console.log("SUPABASE URL:", supabaseUrl);
+console.log("SUPABASE KEY:", supabasePublishableKey ? "Defined" : "Undefined");
 
-if (!supabaseUrl || !supabaseAnonKey) {
+if (!supabaseUrl || !supabasePublishableKey) {
   throw new Error("Missing Supabase environment variables");
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = createClient(supabaseUrl, supabasePublishableKey);

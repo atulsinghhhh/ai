@@ -1,4 +1,2 @@
-export const BACKEND_URL = 
-  (import.meta as any).env?.BACKEND_URL || 
-  (typeof process !== "undefined" ? process.env?.BACKEND_URL : undefined) || 
-  "https://ai-hj37.onrender.com";
+// @ts-ignore
+export const BACKEND_URL = import.meta.env?.BUN_PUBLIC_BACKEND_URL || process.env.BUN_PUBLIC_BACKEND_URL || "https://ai-hj37.onrender.com";

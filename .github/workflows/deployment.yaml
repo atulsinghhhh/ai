@@ -48,7 +48,7 @@ jobs:
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
       BUN_PUBLIC_SUPABASE_URL: ${{ secrets.BUN_PUBLIC_SUPABASE_URL }}
       BUN_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.BUN_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
-      BACKEND_URL: ${{ secrets.BACKEND_URL }}
+      BUN_PUBLIC_BACKEND_URL: ${{ secrets.BACKEND_URL }}
 
     steps:
       - name: Checkout code
