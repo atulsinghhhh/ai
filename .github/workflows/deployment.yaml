@@ -25,12 +25,18 @@ jobs:
 
       - name: Health check — Backend
         run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" ${{ secrets.BACKEND_URL }}/health)
-          if [ "$STATUS" != "200" ]; then
-            echo "Backend health check failed with status $STATUS"
-            exit 1
-          fi
-          echo " Backend is live!"
+          echo "Waiting for backend to be healthy at ${{ secrets.BACKEND_URL }}..."
+          for i in {1..30}; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" ${{ secrets.BACKEND_URL }}/health)
+            if [ "$STATUS" == "200" ]; then
+              echo "Backend is live!"
+              exit 0
+            fi
+            echo "Attempt $i: Backend health check returned $STATUS. Retrying in 20s..."
+            sleep 20
+          done
+          echo "Backend health check failed after multiple attempts."
+          exit 1
   deploy-frontend:
     name: Deploy Frontend to Vercel
     runs-on: ubuntu-latest
@@ -74,13 +80,17 @@ jobs:
       - name: Health check — Frontend
         run: |
           echo "Checking $DEPLOY_URL"
-          sleep 10
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" $DEPLOY_URL)
-          if [ "$STATUS" != "200" ]; then
-            echo "Frontend health check failed with status $STATUS"
-            exit 1
-          fi
-          echo "Frontend is live!"
+          for i in {1..15}; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" $DEPLOY_URL)
+            if [ "$STATUS" == "200" ]; then
+              echo "Frontend is live!"
+              exit 0
+            fi
+            echo "Attempt $i: Frontend health check returned $STATUS. Retrying in 10s..."
+            sleep 10
+          done
+          echo "Frontend health check failed after multiple attempts."
+          exit 1
 
   notify:
     name: Deployment Summary
