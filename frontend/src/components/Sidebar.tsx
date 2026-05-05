@@ -1,6 +1,6 @@
 import { useAuth } from "@/hooks/useAuth";
 import type { Conversation } from "@/lib/api";
-import { Plus, MessageSquare, LogOut, Search } from "lucide-react";
+import { Plus, MessageSquare, LogOut } from "lucide-react";
 
 interface SidebarProps {
   conversations: Conversation[];
@@ -8,7 +8,6 @@ interface SidebarProps {
   onSelectConversation: (id: string) => void;
   onNewConversation: () => void;
   collapsed: boolean;
-  onToggle: () => void;
 }
 
 export default function Sidebar({
@@ -17,7 +16,6 @@ export default function Sidebar({
   onSelectConversation,
   onNewConversation,
   collapsed,
-  onToggle,
 }: SidebarProps) {
   const { user, signOut } = useAuth();
 

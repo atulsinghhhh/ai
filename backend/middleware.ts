@@ -25,12 +25,12 @@ export async function middleware(req: Request, res: Response, next: NextFunction
             await prisma.user.upsert({
                 where: { id: userId },
                 update: {
-                    email: data.data.user?.email!,
+                    email: data.data.user!.email!,
                     name: data.data.user?.user_metadata.name,
                 },
                 create: {
                     id: userId,
-                    email: data.data.user?.email!,
+                    email: data.data.user!.email!,
                     provider: data.data.user?.app_metadata.provider === "google" ? "GOOGLE" : "GITHUB",
                     name: data.data.user?.user_metadata.name,
                     supabaseId: userId,

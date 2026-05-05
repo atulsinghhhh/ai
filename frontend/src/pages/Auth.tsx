@@ -1,7 +1,6 @@
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
-import { Search } from "lucide-react";
 
 export default function Auth() {
   const { user, loading, signInWithOAuth } = useAuth();

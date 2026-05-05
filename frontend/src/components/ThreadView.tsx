@@ -34,11 +34,12 @@ export default function ThreadView({
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll on new content
+  const lastMessageText = messages[messages.length - 1]?.streamedText;
   useEffect(() => {
     if (bottomRef.current) {
       bottomRef.current.scrollIntoView({ behavior: "smooth" });
     }
-  }, [messages, messages[messages.length - 1]?.streamedText]);
+  }, [messages, lastMessageText]);
 
   return (
     <div className="flex flex-col h-full">

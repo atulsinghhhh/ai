@@ -29,13 +29,7 @@ export default function Dashboard() {
     }
   }, [user, loading, navigate]);
 
-  // Load conversations on mount
-  useEffect(() => {
-    if (!user) return;
-    loadConversations();
-  }, [user]);
-
-  async function loadConversations() {
+  const loadConversations = useCallback(async () => {
     try {
       const token = await getAccessToken();
       if (!token) return;
@@ -44,7 +38,13 @@ export default function Dashboard() {
     } catch (err) {
       console.error("Failed to load conversations:", err);
     }
-  }
+  }, [getAccessToken]);
+
+  // Load conversations on mount
+  useEffect(() => {
+    if (!user) return;
+    loadConversations();
+  }, [user, loadConversations]);
 
   function handleNewConversation() {
     setActiveConversationId(null);

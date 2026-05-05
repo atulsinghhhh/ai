@@ -20,7 +20,7 @@ const result = await Bun.build({
       process.env.BUN_PUBLIC_SUPABASE_URL ?? ""
     ),
     "import.meta.env.BACKEND_URL": JSON.stringify(
-      process.env.BACKEND_URL ?? "http://localhost:3001"
+      process.env.BACKEND_URL ?? "https://ai-hj37.onrender.com"
     ),
     "import.meta.env.BUN_PUBLIC_SUPABASE_PUBLISHABLE_KEY": JSON.stringify(
       process.env.BUN_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? ""

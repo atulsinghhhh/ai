@@ -6,11 +6,18 @@
   "scripts": {
     "start": "bun index.ts",
     "dev": "bun --hot index.ts",
-    "prisma:generate": "bunx prisma generate"
+    "prisma:generate": "bunx prisma generate",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "bun test"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/bun": "latest",
-    "prisma": "^7.8.0"
+    "eslint": "^10.3.0",
+    "globals": "^17.6.0",
+    "prisma": "^7.8.0",
+    "typescript-eslint": "^8.59.2"
   },
   "peerDependencies": {
     "typescript": "^5"
