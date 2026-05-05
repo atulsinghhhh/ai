@@ -5,9 +5,6 @@
  * It is included in `src/index.html`.
  */
 
-if (typeof process === "undefined") {
-  (window as any).process = { env: {} };
-}
 
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";

@@ -15,24 +15,14 @@ const result = await Bun.build({
   target: "browser",
   sourcemap: "linked",
   define: {
-    "process.env.NODE_ENV": JSON.stringify("production"),
-    "process.env.BUN_PUBLIC_SUPABASE_URL": JSON.stringify(
-      process.env.BUN_PUBLIC_SUPABASE_URL ?? ""
-    ),
-    "process.env.BUN_PUBLIC_SUPABASE_PUBLISHABLE_KEY": JSON.stringify(
-      process.env.BUN_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? ""
-    ),
-    "process.env.BACKEND_URL": JSON.stringify(
-      process.env.BACKEND_URL ?? "https://ai-hj37.onrender.com"
-    ),
     "import.meta.env.BUN_PUBLIC_SUPABASE_URL": JSON.stringify(
       process.env.BUN_PUBLIC_SUPABASE_URL ?? ""
     ),
     "import.meta.env.BUN_PUBLIC_SUPABASE_PUBLISHABLE_KEY": JSON.stringify(
       process.env.BUN_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? ""
     ),
-    "import.meta.env.BACKEND_URL": JSON.stringify(
-      process.env.BACKEND_URL ?? "https://ai-hj37.onrender.com"
+    "import.meta.env.BUN_PUBLIC_BACKEND_URL": JSON.stringify(
+      process.env.BUN_PUBLIC_BACKEND_URL ?? "https://ai-hj37.onrender.com"
     ),
   },
 });
