@@ -73,9 +73,9 @@ jobs:
       - name: Deploy to Vercel Production
         id: deploy
         run: |
-            DEPLOY_URL=$(vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }})
-            echo "DEPLOY_URL=$DEPLOY_URL" >> $GITHUB_ENV
-        working-directory: ./frontend
+          # Use --yes to skip confirmation and --cwd to ensure correct directory
+          DEPLOY_URL=$(vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }} --yes --cwd ./frontend)
+          echo "DEPLOY_URL=$DEPLOY_URL" >> $GITHUB_ENV
 
       - name: Health check — Frontend
         run: |
