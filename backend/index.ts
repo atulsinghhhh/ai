@@ -20,6 +20,15 @@ const client = tavily({
     apiKey: process.env.TAVILY_API_KEY || "",
 })
 
+
+app.get('/health', (req, res) => {
+    res.status(200).json({
+        status: 'ok',
+        timestamp: new Date().toISOString(),
+        uptime: process.uptime(),
+    });
+})
+
 // GET /conversations - Get all conversations for the user
 app.get("/conversations", middleware, async (req, res) => {
     try {
@@ -157,7 +166,7 @@ app.post("/conversations/:conversationId", middleware, async (req, res) => {
 });
 
 // POST /perplexity-ask - One-off query (legacy endpoint, similar to POST /conversations/:id)
-app.post("/perplexity-ask", async (req, res) => {
+app.post("/perplexity-ask",middleware, async (req, res) => {
     try {
         const { query } = req.body;
 

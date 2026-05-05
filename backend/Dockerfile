@@ -1,0 +1,17 @@
+FROM oven/bun:latest
+
+WORKDIR /app
+
+COPY package.json bun.lock ./
+
+RUN bun install --frozen-lockfile
+
+COPY prisma ./prisma
+
+RUN bun run prisma:generate
+
+COPY . .
+
+EXPOSE 3001
+
+CMD ["bun", "run", "start"]

@@ -19,6 +19,9 @@ const result = await Bun.build({
     "import.meta.env.BUN_PUBLIC_SUPABASE_URL": JSON.stringify(
       process.env.BUN_PUBLIC_SUPABASE_URL ?? ""
     ),
+    "import.meta.env.BACKEND_URL": JSON.stringify(
+      process.env.BACKEND_URL ?? "http://localhost:3001"
+    ),
     "import.meta.env.BUN_PUBLIC_SUPABASE_PUBLISHABLE_KEY": JSON.stringify(
       process.env.BUN_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? ""
     ),
