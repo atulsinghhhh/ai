@@ -15,6 +15,16 @@ const result = await Bun.build({
   target: "browser",
   sourcemap: "linked",
   define: {
+    "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV || "development"),
+    "process.env.BUN_PUBLIC_SUPABASE_URL": JSON.stringify(
+      process.env.BUN_PUBLIC_SUPABASE_URL ?? ""
+    ),
+    "process.env.BUN_PUBLIC_SUPABASE_PUBLISHABLE_KEY": JSON.stringify(
+      process.env.BUN_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? ""
+    ),
+    "process.env.BUN_PUBLIC_BACKEND_URL": JSON.stringify(
+      process.env.BUN_PUBLIC_BACKEND_URL ?? "https://ai-hj37.onrender.com"
+    ),
     "import.meta.env.BUN_PUBLIC_SUPABASE_URL": JSON.stringify(
       process.env.BUN_PUBLIC_SUPABASE_URL ?? ""
     ),

@@ -3,8 +3,26 @@ import index from "./index.html";
 
 const server = serve({
   routes: {
-    // Serve index.html for all unmatched routes.
-    "/*": index,
+    // Serve index.html with injected environment variables for development.
+    "/*": async () => {
+      const html = await index.text();
+      const injectedHtml = html.replace(
+        "<head>",
+        `<head>
+    <script>
+      window.process = { 
+        env: { 
+          BUN_PUBLIC_SUPABASE_URL: ${JSON.stringify(process.env.BUN_PUBLIC_SUPABASE_URL)},
+          BUN_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${JSON.stringify(process.env.BUN_PUBLIC_SUPABASE_PUBLISHABLE_KEY)},
+          BUN_PUBLIC_BACKEND_URL: ${JSON.stringify(process.env.BUN_PUBLIC_BACKEND_URL)}
+        } 
+      };
+    </script>`
+      );
+      return new Response(injectedHtml, {
+        headers: { "Content-Type": "text/html" },
+      });
+    },
 
     "/api/hello": {
       async GET(_req) {
