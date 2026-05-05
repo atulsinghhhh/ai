@@ -44,6 +44,10 @@ jobs:
           bun install --frozen-lockfile
           bun run lint
           bun run test
+        env:
+          BUN_PUBLIC_BACKEND_URL: ${{ secrets.BACKEND_URL }}
+          BUN_PUBLIC_SUPABASE_URL: ${{ secrets.BUN_PUBLIC_SUPABASE_URL }}
+          BUN_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.BUN_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
 
   backend-build:
     name: Build Backend Image
