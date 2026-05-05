@@ -52,6 +52,10 @@ jobs:
       - name: Install Vercel CLI
         run: bun install -g vercel
 
+      - name: Install dependencies
+        run: bun install
+        working-directory: ./frontend
+
       - name: Pull Vercel environment
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
         working-directory: ./frontend
