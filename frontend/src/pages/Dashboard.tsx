@@ -1,12 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useAuth } from "@/hooks/useAuth";
-import {
-  fetchConversations,
-  createConversation,
-  sendQuery,
-  type Conversation,
-} from "@/lib/api";
+import { fetchConversations,createConversation,sendQuery,type Conversation } from "@/lib/api";
 import Sidebar from "@/components/Sidebar";
 import HomeView from "@/components/HomeView";
 import ThreadView, { type MessageBlock } from "@/components/ThreadView";
@@ -179,7 +174,6 @@ export default function Dashboard() {
         onSelectConversation={handleSelectConversation}
         onNewConversation={handleNewConversation}
         collapsed={sidebarCollapsed}
-        onToggle={() => setSidebarCollapsed(!sidebarCollapsed)}
       />
 
       {/* Main content */}
