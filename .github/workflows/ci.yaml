@@ -118,6 +118,6 @@ jobs:
           cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/frontend:cache
           cache-to: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/frontend:cache,mode=max
           build-args: |
-            BUN_PUBLIC_BACKEND_URL=${{ secrets.BUN_PUBLIC_BACKEND_URL }}
+            BUN_PUBLIC_BACKEND_URL=${{ secrets.BACKEND_URL }}
             BUN_PUBLIC_SUPABASE_URL=${{ secrets.BUN_PUBLIC_SUPABASE_URL }}
             BUN_PUBLIC_SUPABASE_PUBLISHABLE_KEY=${{ secrets.BUN_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}

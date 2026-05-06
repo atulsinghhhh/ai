@@ -178,6 +178,7 @@ export async function sendQuery(
 }
 
 export async function perplexityAsk(
+  token: string,
   query: string,
   onChunk: (text: string) => void,
   onComplete: (result: StreamResult) => void,
@@ -187,6 +188,7 @@ export async function perplexityAsk(
     const res = await fetch(`${BACKEND_URL}/perplexity-ask`, {
       method: "POST",
       headers: {
+        Authorization: token,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ query }),

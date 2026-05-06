@@ -251,12 +251,9 @@ app.post("/follow-up-questions", middleware, async (req, res) => {
             system: "Generate follow-up questions concisely.",
         });
 
-        let fullResponse = "";
-
         res.setHeader("Content-Type", "text/event-stream");
 
         for await (const textPart of result.textStream) {
-            fullResponse += textPart;
             res.write(textPart);
         }
 
