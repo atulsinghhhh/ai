@@ -88,7 +88,7 @@ jobs:
             GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }}
             SUPABASE_URL=${{ secrets.SUPABASE_URL }}
             SUPABASE_SERVICE_ROLE_KEY=${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-            FRONTEND_URL=${{secrets.FRONTEND_URL}}
+            FRONTEND_URL=${{ secrets.FRONTEND_URL }}
 
   frontend-build:
     name: Build Frontend Image
