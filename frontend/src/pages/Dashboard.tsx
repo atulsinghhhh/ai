@@ -5,7 +5,7 @@ import { fetchConversations,createConversation,sendQuery,type Conversation } fro
 import Sidebar from "@/components/Sidebar";
 import HomeView from "@/components/HomeView";
 import ThreadView, { type MessageBlock } from "@/components/ThreadView";
-import { PanelLeft } from "lucide-react";
+import { PanelLeft, ChevronRight } from "lucide-react";
 
 export default function Dashboard() {
   const { user, loading, getAccessToken } = useAuth();
@@ -155,8 +155,8 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="w-6 h-6 border-2 border-[oklch(0.65_0.18_230)] border-t-transparent rounded-full animate-spin" />
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="w-8 h-8 border-2 border-[oklch(0.65_0.18_230)] border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -166,7 +166,7 @@ export default function Dashboard() {
   const hasActiveThread = messages.length > 0;
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex bg-background">
       {/* Sidebar */}
       <Sidebar
         conversations={conversations}
@@ -179,36 +179,42 @@ export default function Dashboard() {
       {/* Main content */}
       <main
         className={`
-          flex-1 min-h-screen transition-all duration-300
-          ${sidebarCollapsed ? "ml-0" : "ml-[260px]"}
+          flex-1 min-h-screen flex flex-col transition-all duration-400 ease-[cubic-bezier(0.2,0,0,1)]
+          ${sidebarCollapsed ? "ml-0" : "ml-[240px]"}
         `}
       >
         {/* Top bar */}
-        <header className="sticky top-0 z-20 flex items-center gap-3 px-4 py-3 bg-[oklch(0.13_0.004_260/80%)] backdrop-blur-xl border-b border-[oklch(1_0_0/4%)]">
+        <header className="sticky top-0 z-20 flex items-center gap-4 px-6 h-[56px] bg-background/80 backdrop-blur-md">
           <button
             onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-            className="p-1.5 rounded-lg hover:bg-[oklch(1_0_0/6%)] text-[oklch(0.55_0.01_260)] hover:text-[oklch(0.78_0.008_260)] transition-all cursor-pointer bg-transparent border-none"
+            className="p-1.5 rounded-lg hover:bg-[oklch(1_0_0/5%)] text-[oklch(0.4_0.01_260)] hover:text-[oklch(0.8_0.005_260)] transition-all cursor-pointer bg-transparent border-none"
             title={sidebarCollapsed ? "Open sidebar" : "Close sidebar"}
           >
             <PanelLeft size={18} />
           </button>
+          
           {hasActiveThread && (
-            <span className="text-[0.82rem] text-[oklch(0.55_0.01_260)] truncate">
-              {conversations.find((c) => c.id === activeConversationId)?.title || "New Thread"}
-            </span>
+            <div className="flex items-center gap-2 overflow-hidden">
+               <ChevronRight size={14} className="text-[oklch(0.3_0.01_260)] flex-shrink-0" />
+               <span className="text-[0.85rem] font-medium text-[oklch(0.6_0.01_260)] truncate">
+                 {conversations.find((c) => c.id === activeConversationId)?.title || "Current Thread"}
+               </span>
+            </div>
           )}
         </header>
 
-        {/* Content */}
-        {hasActiveThread ? (
-          <ThreadView
-            messages={messages}
-            onSearch={handleSearch}
-            disabled={isQuerying}
-          />
-        ) : (
-          <HomeView onSearch={handleSearch} disabled={isQuerying} />
-        )}
+        {/* Content area */}
+        <div className="flex-1 overflow-hidden">
+          {hasActiveThread ? (
+            <ThreadView
+              messages={messages}
+              onSearch={handleSearch}
+              disabled={isQuerying}
+            />
+          ) : (
+            <HomeView onSearch={handleSearch} disabled={isQuerying} />
+          )}
+        </div>
       </main>
     </div>
   );

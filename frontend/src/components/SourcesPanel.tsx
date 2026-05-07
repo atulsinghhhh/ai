@@ -1,5 +1,5 @@
 import type { Source } from "@/lib/api";
-import { ExternalLink, Globe } from "lucide-react";
+import { Globe, Layers } from "lucide-react";
 import { useState } from "react";
 
 interface SourcesPanelProps {
@@ -10,7 +10,7 @@ interface SourcesPanelProps {
 function getFaviconUrl(url: string): string {
   try {
     const hostname = new URL(url).hostname;
-    return `https://www.google.com/s2/favicons?domain=${hostname}&sz=32`;
+    return `https://www.google.com/s2/favicons?domain=${hostname}&sz=64`;
   } catch {
     return "";
   }
@@ -30,19 +30,18 @@ export default function SourcesPanel({ sources, loading }: SourcesPanelProps) {
 
   if (loading) {
     return (
-      <div className="mb-5 animate-fade-in-up">
-        <div className="flex items-center gap-2 mb-3">
-          <Globe size={14} className="text-[oklch(0.65_0.18_230)]" />
-          <span className="text-[0.8rem] font-medium text-[oklch(0.7_0.008_260)] uppercase tracking-wider">
+      <div className="mb-8 animate-reveal">
+        <div className="flex items-center gap-2 mb-4">
+          <Layers size={16} className="text-[oklch(0.5_0.01_260)]" />
+          <span className="text-[0.8rem] font-bold text-[oklch(0.5_0.01_260)] uppercase tracking-widest">
             Sources
           </span>
-          <div className="flex-1 h-px bg-[oklch(1_0_0/5%)]" />
         </div>
-        <div className="flex gap-2 overflow-x-auto pb-1">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {[1, 2, 3, 4].map((i) => (
             <div
               key={i}
-              className="flex-shrink-0 w-[180px] h-[72px] rounded-xl shimmer"
+              className="h-[64px] rounded-xl shimmer"
             />
           ))}
         </div>
@@ -53,18 +52,18 @@ export default function SourcesPanel({ sources, loading }: SourcesPanelProps) {
   if (!sources.length) return null;
 
   return (
-    <div className="mb-5 animate-fade-in-up">
-      <div className="flex items-center gap-2 mb-3">
-        <Globe size={14} className="text-[oklch(0.65_0.18_230)]" />
-        <span className="text-[0.8rem] font-medium text-[oklch(0.7_0.008_260)] uppercase tracking-wider">
+    <div className="mb-8 animate-reveal">
+      <div className="flex items-center gap-2 mb-4">
+        <Layers size={16} className="text-[oklch(0.5_0.01_260)]" />
+        <span className="text-[0.8rem] font-bold text-[oklch(0.5_0.01_260)] uppercase tracking-widest">
           Sources
         </span>
-        <span className="text-[0.72rem] text-[oklch(0.45_0.01_260)]">
+        <span className="text-[0.7rem] font-medium px-1.5 py-0.5 rounded bg-[oklch(1_0_0/5%)] text-[oklch(0.4_0.01_260)] ml-1">
           {sources.length}
         </span>
-        <div className="flex-1 h-px bg-[oklch(1_0_0/5%)]" />
       </div>
-      <div className="flex flex-wrap gap-2">
+      
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {displaySources.map((source, idx) => (
           <a
             key={idx}
@@ -72,52 +71,65 @@ export default function SourcesPanel({ sources, loading }: SourcesPanelProps) {
             target="_blank"
             rel="noopener noreferrer"
             className="
-              group/source flex items-start gap-2.5 
-              bg-[oklch(0.17_0.005_260)] 
+              group/source flex flex-col justify-between p-3
+              bg-[oklch(0.15_0.005_260)] 
               border border-[oklch(1_0_0/6%)] 
-              rounded-xl px-3 py-2.5 
-              w-[calc(50%-0.25rem)] min-w-[170px]
-              hover:border-[oklch(1_0_0/12%)] 
-              hover:bg-[oklch(0.19_0.005_260)]
-              transition-all duration-200
-              no-underline
+              rounded-xl
+              hover:border-[oklch(1_0_0/15%)] 
+              hover:bg-[oklch(0.17_0.005_260)]
+              hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)]
+              transition-all duration-300
+              no-underline min-h-[70px]
             "
           >
-            <img
-              src={getFaviconUrl(source.url)}
-              alt=""
-              className="w-4 h-4 mt-0.5 rounded-sm flex-shrink-0 opacity-70 group-hover/source:opacity-100 transition-opacity"
-              onError={(e) => {
-                (e.target as HTMLImageElement).style.display = "none";
-              }}
-            />
-            <div className="min-w-0 flex-1">
-              <div className="text-[0.8rem] font-medium text-[oklch(0.88_0.005_260)] truncate leading-snug group-hover/source:text-[oklch(0.65_0.18_230)] transition-colors">
-                {source.title}
-              </div>
-              <div className="flex items-center gap-1 mt-0.5">
-                <span className="text-[0.7rem] text-[oklch(0.45_0.01_260)] truncate">
-                  {getDomain(source.url)}
-                </span>
-                <ExternalLink
-                  size={10}
-                  className="text-[oklch(0.4_0.01_260)] flex-shrink-0 opacity-0 group-hover/source:opacity-100 transition-opacity"
-                />
-              </div>
+            <div className="text-[0.82rem] font-medium text-[oklch(0.85_0.005_260)] line-clamp-2 leading-tight group-hover/source:text-[oklch(0.98_0_0)] transition-colors mb-2">
+              {source.title}
+            </div>
+            <div className="flex items-center gap-2 mt-auto">
+              <img
+                src={getFaviconUrl(source.url)}
+                alt=""
+                className="w-3.5 h-3.5 rounded-sm flex-shrink-0 grayscale group-hover/source:grayscale-0 transition-all opacity-60 group-hover/source:opacity-100"
+                onError={(e) => {
+                   (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${getDomain(source.url)}&background=random`;
+                }}
+              />
+              <span className="text-[0.7rem] text-[oklch(0.4_0.01_260)] truncate font-medium">
+                {getDomain(source.url)}
+              </span>
+              <span className="text-[0.65rem] text-[oklch(0.3_0.01_260)] font-bold ml-auto opacity-0 group-hover/source:opacity-100 transition-opacity">
+                {idx + 1}
+              </span>
             </div>
           </a>
         ))}
+
+        {!expanded && sources.length > 4 && (
+          <button
+            onClick={() => setExpanded(true)}
+            className="
+              flex flex-col items-center justify-center p-3
+              bg-[oklch(0.15_0.005_260)] 
+              border border-dashed border-[oklch(1_0_0/10%)] 
+              rounded-xl text-[0.8rem] font-medium text-[oklch(0.5_0.01_260)]
+              hover:border-[oklch(1_0_0/20%)] hover:bg-[oklch(0.17_0.005_260)] hover:text-[oklch(0.7_0.005_260)]
+              transition-all duration-300 cursor-pointer
+            "
+          >
+             <span>+ {sources.length - 4} more</span>
+          </button>
+        )}
       </div>
-      {sources.length > 4 && (
+      
+      {expanded && (
         <button
-          onClick={() => setExpanded(!expanded)}
-          className="mt-2 text-[0.78rem] text-[oklch(0.65_0.18_230)] hover:text-[oklch(0.72_0.18_230)] transition-colors cursor-pointer bg-transparent border-none"
+          onClick={() => setExpanded(false)}
+          className="mt-3 text-[0.78rem] font-medium text-[oklch(0.65_0.18_230)] hover:text-[oklch(0.72_0.18_230)] transition-colors cursor-pointer bg-transparent border-none"
         >
-          {expanded
-            ? "Show fewer"
-            : `View ${sources.length - 4} more source${sources.length - 4 > 1 ? "s" : ""}`}
+          Show fewer
         </button>
       )}
     </div>
   );
 }
+
