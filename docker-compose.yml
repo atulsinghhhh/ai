@@ -5,7 +5,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: vestra-backend
+    container_name: astra-backend
     ports:
       - "3001:3001"
     env_file:
@@ -19,7 +19,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: vestra-frontend
+    container_name: astra-frontend
     ports:
       - "3000:3000"
     env_file:

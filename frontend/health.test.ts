@@ -2,8 +2,8 @@ import { expect, test, describe } from "bun:test";
 
 describe("Frontend Unit Tests", () => {
   test("App branding constants", () => {
-    const APP_NAME = "Vestra AI";
-    expect(APP_NAME).toBe("Vestra AI");
+    const APP_NAME = "Astra AI";
+    expect(APP_NAME).toBe("Astra AI");
   });
 
   test("API utility functions are defined", async () => {

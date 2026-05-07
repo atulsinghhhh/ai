@@ -77,7 +77,7 @@ export default function ThreadView({
                        <Sparkles size={16} strokeWidth={2.5} />
                     </div>
                     <span className="text-[0.85rem] font-bold text-[oklch(0.98_0_0)] tracking-tight">
-                      Vestra Answer
+                      Astra Answer
                     </span>
                   </div>
                   <AnswerRenderer

@@ -33,7 +33,7 @@ export default function Sidebar({
       {/* Header / Brand */}
       <div className="flex items-center gap-3 px-5 pt-6 pb-6">
         <span className="text-[1.1rem] font-bold text-[oklch(0.98_0_0)] tracking-tight">
-          Vestra
+          Astra
         </span>
       </div>
 

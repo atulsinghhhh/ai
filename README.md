@@ -1,6 +1,6 @@
-# Vestra AI – Intelligent Search Engine
+# Astra AI – Intelligent Search Engine
 
-Vestra AI is a premium, AI-powered search engine that provides direct answers with cited sources, similar to Perplexity. It leverages modern LLMs and real-time web search to deliver accurate, contextual information.
+Astra AI is a premium, AI-powered search engine that provides direct answers with cited sources, similar to Perplexity. It leverages modern LLMs and real-time web search to deliver accurate, contextual information.
 
 ## 🔗 Live Links
 - **Frontend**: [https://frontend-six-peach-98.vercel.app](https://frontend-six-peach-98.vercel.app)
