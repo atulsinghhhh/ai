@@ -32,9 +32,6 @@ export default function Sidebar({
     >
       {/* Header / Brand */}
       <div className="flex items-center gap-3 px-5 pt-6 pb-6">
-        <div className="w-7 h-7 bg-[oklch(0.65_0.18_230)] rounded-lg flex items-center justify-center shadow-[0_0_15px_oklch(0.65_0.18_230/30%)]">
-           <Search size={16} className="text-white" strokeWidth={3} />
-        </div>
         <span className="text-[1.1rem] font-bold text-[oklch(0.98_0_0)] tracking-tight">
           Vestra
         </span>
